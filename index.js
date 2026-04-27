@@ -1,6 +1,14 @@
-const { readTasks } = required('./tasks');
+const { readTasks, writeTasks } = require('./tasks');
 const [,, cmd] = process.argv;
 
-if (!cmd) {
-    console.log('TakMaster CLI - usa: node index.js <comando>')
+if (cmd === 'list') {
+    const tasks = readTasks();
+    if (tasks.length === 0) {
+        console.log('No hay tareas.');
+    } else {
+      tasks.forEach((t, i) => {
+        const icon = t.done ? '✓' : '○';
+        console.log(`\${icon} [${icon}] \${t.title}`);
+        });
+    }
 }
